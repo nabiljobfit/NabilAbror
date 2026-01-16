@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Link Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style>
+        /* --- 1. SETUP VARIABEL & RESET --- */
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.15);
+            --glass-border: rgba(255, 255, 255, 0.3);
+            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+            --text-primary: #ffffff;
+            --text-secondary: #e0e0e0;
+            --accent-color: #ff9a9e;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* --- 2. BACKGROUND GRADASI PREMIUM (Mesh Gradient) --- */
+        body {
+            min-height: 100vh;
+            /* Gradasi animasi yang lembut dan kompleks */
+            background: radial-gradient(circle at 0% 0%, #3a1c71, #d76d77, #ffaf7b);
+            background-size: 200% 200%;
+            animation: gradientMove 15s ease infinite;
+            color: var(--text-primary);
+            display: flex;
+            justify-content: center;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* --- 3. CONTAINER UTAMA --- */
+        .container {
+            width: 100%;
+            max-width: 550px; /* Ukuran pas untuk mobile/desktop */
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Overlay gelap halus agar teks terbaca */
+        .container::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.1);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* --- 4. HEADER PROFILE --- */
+        .profile-section {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeInDown 1s ease;
+        }
+
+        .avatar-frame {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            padding: 4px;
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4); /* Ring Gradient */
+            margin: 0 auto 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(255,255,255,0.8);
+        }
+
+        .username {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            letter-spacing: 0.5px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .bio {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+        }
+
+        /* --- 5. SEARCH BAR ESTETIK --- */
+        .search-wrapper {
+            width: 100%;
+            margin-bottom: 30px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            animation: fadeInUp 1s ease 0.2s backwards;
+        }
+
+        .search-box {
+            position: relative;
+            width: 100%;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 16px 50px 16px 25px;
+            border-radius: 30px;
+            border: 1px solid var(--glass-border);
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+            box-shadow: var(--glass-shadow);
+        }
+
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .search-input:focus {
+            background: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            transform: translateY(-2px);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            pointer-events: none;
+        }
+
+        /* --- 6. LINK CARDS (GLASSMORPHISM) --- */
+        .links-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .link-card {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            border-radius: 16px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.5s ease backwards;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        /* Efek Hover Keren */
+        .link-card:hover {
+            transform: translateY(-3px) scale(1.02);
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            border-color: rgba(255,255,255,0.6);
+        }
+
+        /* Efek Kilauan (Shine) saat hover */
+        .link-card::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 50%; height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.2), transparent);
+            transform: skewX(-25deg);
+            transition: 0.5s;
+        }
+        .link-card:hover::after {
+            left: 150%;
+        }
+
+        .card-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            object-fit: cover;
+            margin-right: 15px;
+            background-color: rgba(0,0,0,0.2);
+        }
+
+        .card-info {
+            flex: 1;
+        }
+
+        .card-title {
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 2px;
+        }
+
+        .card-desc {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .card-arrow {
+            font-size: 1.2rem;
+            opacity: 0.6;
+            transition: 0.3s;
+        }
+
+        .link-card:hover .card-arrow {
+            opacity: 1;
+            transform: translateX(3px);
+        }
+
+        /* --- 7. NOT FOUND STATE --- */
+        .not-found {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            border: 1px dashed rgba(255, 255, 255, 0.3);
+            display: none; /* Hidden by default */
+            animation: fadeIn 0.5s ease;
+        }
+
+        .not-found i {
+            font-size: 3rem;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .not-found p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* --- ANIMASI KEYFRAMES --- */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+/* --- 8. FLOATING WHATSAPP BUTTON --- */
+        .fab-wa {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: #25D366; /* Warna khas WA */
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            cursor: pointer;
+            z-index: 999; /* Agar selalu di atas */
+            transition: all 0.3s ease;
+            animation: bounceIn 1s ease 1s backwards;
+        }
+
+        .fab-wa:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+        }
+
+        .fab-wa i {
+            font-size: 32px;
+            color: white;
+        }
+
+        /* --- 9. MODAL / POPUP FORM --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-box {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            padding: 30px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 400px;
+            position: relative;
+            transform: scale(0.8);
+            transition: all 0.3s ease;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .modal-overlay.active .modal-box {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .close-btn:hover { color: #fff; }
+
+        /* Style Form di dalam Modal */
+        .form-group { margin-bottom: 15px; }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(0,0,0,0.2);
+            color: #fff;
+            outline: none;
+            font-family: inherit;
+        }
+
+        .form-input:focus {
+            border-color: rgba(255,255,255,0.5);
+            background: rgba(0,0,0,0.3);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            border: none;
+            background: #25D366;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover { background: #1ebc57; }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0); opacity: 0; }
+            60% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        /* --- 10. PREMIUM AI CHAT BUTTON --- */
+        .fab-ai {
+            position: fixed;
+            bottom: 100px; /* Di atas tombol WA (30px + 70px) */
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            /* Gradasi Premium Soft: Ungu ke Biru Langit */
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(118, 75, 162, 0.4);
+            cursor: pointer;
+            z-index: 999;
+            transition: all 0.3s ease;
+            animation: bounceIn 1s ease 0.8s backwards, floatAnim 3s ease-in-out infinite;
+        }
+
+        .fab-ai:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px rgba(102, 126, 234, 0.6);
+        }
+
+        .fab-ai i {
+            font-size: 28px;
+            color: white;
+        }
+
+        @keyframes floatAnim {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* --- 11. PREMIUM AI CHAT POPUP (UI MEWAH) --- */
+        .ai-modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.3); /* Dimmed background */
+            backdrop-filter: blur(4px);
+            z-index: 2000;
+            display: flex;
+            justify-content: flex-end; /* Muncul dari kanan bawah */
+            align-items: flex-end;
+            padding: 20px 30px 110px 20px; /* Jarak dari tombol WA */
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .ai-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .ai-chat-box {
+            width: 100%;
+            max-width: 380px;
+            height: 500px;
+            max-height: 80vh;
+            /* Gradasi Background Card yang Elegan & Soft */
+            background: linear-gradient(160deg, #2a2a72 0%, #009ffd 100%);
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transform: translateY(20px) scale(0.95);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .ai-modal-overlay.active .ai-chat-box {
+            transform: translateY(0) scale(1);
+        }
+
+        /* Header Chat */
+        .ai-header {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .ai-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .ai-avatar-small {
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            background: #fff;
+            padding: 2px;
+        }
+        
+        .ai-avatar-small img {
+            width: 100%; height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .ai-info h3 {
+            font-size: 1rem;
+            color: #fff;
+            margin: 0;
+            font-weight: 600;
+        }
+        
+        .ai-info span {
+            font-size: 0.75rem;
+            color: #a0e6ff; /* Aksen biru muda */
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .ai-info span::before {
+            content: '';
+            width: 6px; height: 6px;
+            background: #00ff88;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .ai-close-btn {
+            background: transparent;
+            border: none;
+            color: rgba(255,255,255,0.7);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .ai-close-btn:hover { color: #fff; transform: rotate(90deg); }
+
+        /* Area Pesan */
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            scroll-behavior: smooth;
+        }
+
+        /* Scrollbar Custom */
+        .chat-messages::-webkit-scrollbar { width: 5px; }
+        .chat-messages::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
+
+        .message {
+            max-width: 85%;
+            padding: 12px 16px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            position: relative;
+            animation: popIn 0.3s ease forwards;
+        }
+
+        /* Bubble AI */
+        .message.ai {
+            align-self: flex-start;
+            background: rgba(255, 255, 255, 0.15); /* Glassy White */
+            color: #f0f0f0;
+            border-radius: 20px 20px 20px 4px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Bubble User */
+        .message.user {
+            align-self: flex-end;
+            background: linear-gradient(90deg, #ff9a9e 0%, #fad0c4 100%); /* Aksen Peach sesuai tema web */
+            color: #4a2c2c;
+            font-weight: 500;
+            border-radius: 20px 20px 4px 20px;
+            box-shadow: 0 4px 15px rgba(255, 154, 158, 0.3);
+        }
+
+        /* Typing Indicator */
+        .typing-indicator {
+            display: none;
+            align-self: flex-start;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 15px;
+            border-radius: 20px;
+            gap: 5px;
+        }
+        .typing-dot {
+            width: 6px; height: 6px;
+            background: #fff;
+            border-radius: 50%;
+            animation: bounce 1.4s infinite ease-in-out both;
+        }
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+
+        /* Input Area */
+        .chat-input-area {
+            padding: 15px 20px;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chat-input {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 12px 15px;
+            border-radius: 25px;
+            color: #fff;
+            outline: none;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+        .chat-input::placeholder { color: rgba(255,255,255,0.5); }
+        .chat-input:focus { background: rgba(255, 255, 255, 0.25); }
+
+        .send-btn {
+            background: #00ff88;
+            border: none;
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #1a4a3a;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
+        }
+        .send-btn:hover { transform: scale(1.1); background: #33ff99; }
+
+        @keyframes popIn {
+            from { opacity: 0; transform: translateY(10px) scale(0.9); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <header class="profile-section">
+            <div class="avatar-frame">
+                <img src="https://media.licdn.com/dms/image/v2/C4E03AQG6Ndmkzye2PA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1660870068170?e=2147483647&v=beta&t=cpps3BJk56ug13GMeBl2dFV2Hcg5RLcbBX_7WC3oDzU" alt="Profile" class="avatar">
+            </div>
+            <h1 class="username">M.Nabilah Abror</h1>
+            <p class="bio">Business Development | Business Consultant | Tech Enthusiast | Finance Analyst</p>
+        </header>
+
+        <div class="search-wrapper">
+            <div class="search-box">
+                <input type="text" id="searchInput" class="search-input" placeholder="Cari link (misal: Youtube, Shop)...">
+                <i class="ph ph-magnifying-glass search-icon"></i>
+            </div>
+        </div>
+
+        <main id="linksContainer" class="links-container">
+            </main>
+
+        <div id="notFoundState" class="not-found">
+            <i class="ph ph-mask-sad"></i>
+            <p>Mohon maaf, hasil pencarian "<span id="searchKeyword" style="font-weight:bold; color:#ff9a9e;"></span>" tidak ditemukan.</p>
+        </div>
+
+        <footer style="margin-top: 40px; font-size: 0.8rem; opacity: 0.6;">
+            &copy; 2026 Nabil Creative. All Rights Reserved.
+        </footer>
+
+    </div>
+    <div class="fab-ai" onclick="toggleAIChat(true)">
+        <i class="ph ph-robot"></i> </div>
+
+    <div id="aiModal" class="ai-modal-overlay">
+        <div class="ai-chat-box">
+            <div class="ai-header">
+                <div class="ai-profile">
+                    <div class="ai-avatar-small">
+                        <img src="https://media.licdn.com/dms/image/v2/C4E03AQG6Ndmkzye2PA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1660870068170?e=2147483647&v=beta&t=cpps3BJk56ug13GMeBl2dFV2Hcg5RLcbBX_7WC3oDzU" alt="AI">
+                    </div>
+                    <div class="ai-info">
+                        <h3>Nabil AI</h3>
+                        <span>Online • Ask me anything</span>
+                    </div>
+                </div>
+                <button class="ai-close-btn" onclick="toggleAIChat(false)">
+                    <i class="ph ph-x"></i>
+                </button>
+            </div>
+
+            <div id="chatMessages" class="chat-messages">
+                <div class="message ai">
+                    Halo! Saya asisten virtual M. Nabilah Abror. 👋<br>
+                    Ada yang bisa saya bantu terkait pengalaman, skill, atau bisnis saya?
+                </div>
+                <div id="typingIndicator" class="typing-indicator">
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                </div>
+            </div>
+
+            <div class="chat-input-area">
+                <input type="text" id="aiInput" class="chat-input" placeholder="Ketik pertanyaan..." onkeypress="handleEnter(event)">
+                <button class="send-btn" onclick="sendMessageAI()">
+                    <i class="ph ph-paper-plane-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+<div class="fab-wa" onclick="toggleModal(true)">
+        <i class="ph ph-chat-teardrop-dots"></i>
+    </div>
+
+    <div id="waModal" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-header">
+                <div class="modal-title">Hubungi Saya via WA</div>
+                <button class="close-btn" onclick="toggleModal(false)">
+                    <i class="ph ph-x"></i>
+                </button>
+            </div>
+            
+            <form id="waForm" onsubmit="sendToWhatsApp(event)">
+                <div class="form-group">
+                    <input type="text" id="waName" class="form-input" placeholder="Nama Anda" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" id="waPhone" class="form-input" placeholder="No. WhatsApp Anda" required>
+                </div>
+                <div class="form-group">
+                    <textarea id="waMessage" class="form-input" rows="4" placeholder="Tulis pesan Anda disini..." required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">
+                    <i class="ph ph-paper-plane-right" style="margin-right:5px;"></i> Kirim Pesan
+                </button>
+            </form>
+        </div>
+    </div>
+    <script>
+        /**
+         * --- DATA LINK (Database Sementara) ---
+         * Kamu bisa menambahkan, menghapus, atau mengedit daftar ini.
+         * title: Judul Link
+         * url: Tujuan link
+         * desc: Keterangan singkat
+         * image: Gambar icon (bisa url gambar apa saja)
+         * keywords: Kata kunci tambahan agar pencarian lebih pintar
+         */
+   /**
+         * --- DATA LINK UPDATE ---
+         * Deskripsi telah diperpanjang dan dibuat lebih profesional.
+         * Keywords telah disesuaikan dengan konteks masing-masing item.
+         */
+        const myLinks = [
+            {
+                title: "My CV",
+                url: "https://drive.google.com/file/d/10NtC8z33P3G57VrLxg1k1STY8pCZe5Tr/view?usp=sharing",
+                desc: "Simak perjalanan karir, kualifikasi, dan detail pengalaman profesional saya secara lengkap.",
+                image: "https://cdn.sejutacita.id/dealls-blog-cms/business_development_adalah_16ebe4569a.jpg",
+                keywords: "cv, resume, riwayat hidup, kerja, profil"
+            },
+            {
+                title: "Instagram",
+                url: "https://www.instagram.com/bimestri/#",
+                desc: "Ikuti update keseharian, hobi, dan koleksi galeri foto terbaru saya.",
+                image: "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?auto=format&fit=crop&w=100&q=80",
+                keywords: "sosmed, foto, ig, daily, update"
+            },
+            {
+                title: "My Portofolio",
+                url: "https://drive.google.com/drive/folders/1jKTRQTRH92YJVgaP_SEm3-zxAk-LXXTT?usp=sharing",
+                desc: "Arsip lengkap berisi proyek-proyek terbaik dan hasil karya yang pernah saya buat.",
+                image: "https://im3-img.indosatooredoo.com/dataprod/portalcontent/portal/images/metaimages/638238308223657966.jpg",
+                keywords: "portofolio, karya, project, desain, dokumen"
+            },
+            {
+                title: "Website Personality",
+                url: "https://nabil-profile.vercel.app/",
+                desc: "Kenali lebih jauh tentang sisi personal, minat, dan cerita perjalanan hidup saya.",
+                image: "https://pasarind.id/assets/media/64e6f316edd1c.jpg",
+                keywords: "web, blog, profil, personal, bio"
+            },
+            {
+                title: "Nexgrata Creative",
+                url: "https://nexgrata.iceiy.com/?i=2",
+                desc: "Agensi kreatif berbasis teknologi untuk solusi digital dan pengembangan website bisnis Anda.",
+                image: "https://tanyadigital.com/wp-content/uploads/2023/05/business-consultant-adalah.jpg",
+                keywords: "agency, tech, website, jasa, creative"
+            },
+            {
+                title: "Putra Barokah Retail",
+                url: "https://tokoputrabarokah.iceiy.com/?i=1",
+                desc: "Usaha retail keluarga terpercaya yang saya kelola dengan sistem manajemen modern.",
+                image: "https://pasarind.id/assets/media/64e6f316edd1c.jpg",
+                keywords: "toko, retail, belanja, bisnis, sembako"
+            },
+            {
+                title: "Brulle Roots",
+                url: "https://brulleroots.iceiy.com/?i=2",
+                desc: "Nikmati kelezatan dessert premium dan inovasi kuliner dari bisnis F&B milik saya.",
+                image: "https://www.fasty.id/wp-content/uploads/2024/06/pos-kasir-bisnis-fnb.png",
+                keywords: "makanan, fnb, dessert, kuliner, jajan"
+            },
+            {
+                title: "Simulasi Chain",
+                url: "https://blockchainedu.iceiy.com/?i=2",
+                desc: "Platform edukasi interaktif untuk memahami dasar-dasar teknologi Web3 & Blockchain.",
+                image: "https://cdn-web-2.ruangguru.com/landing-pages/assets/cac659a9-249c-4579-b53a-817ef4eb1616.png",
+                keywords: "blockchain, web3, crypto, edukasi, teknologi"
+            },
+            {
+                title: "Life Ways",
+                url: "https://life-ways.vercel.app/#",
+                desc: "Sistem manajemen aktivitas cerdas untuk meningkatkan produktivitas dan keteraturan hidup.",
+                image: "https://lh3.googleusercontent.com/pViur3Nk290FgulZEKdgkU1KmQtsVhNwrlmA9ZMK3ZBmrvPZLIH9CLX0BpQoJEdSOrzqExtecb4FYaDC8BpLlLkhgKOhihzLG2QUy5zRKYQsdOKmVxocak2HmwfEioivdzVSjC3P",
+                keywords: "produktivitas, manajemen, tools, planning, aktivitas"
+            },
+            {
+                title: "Our Project dan Vision",
+                url: "https://nabiledu.iceiy.com/?i=2",
+                desc: "Eksplorasi visi masa depan dan berbagai proyek inovatif yang sedang kami kembangkan.",
+                image: "https://sma3jogja.sch.id/wp-content/uploads/2020/05/shutterstock-434504776.png",
+                keywords: "visi, misi, masa depan, project, rencana"
+            },
+            {
+                title: "Skill Flow Project",
+                url: "https://skillflow.iceiy.com/?i=2",
+                desc: "Wadah edukasi dan pengembangan skill kompetisi untuk mencetak generasi juara.",
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu6neIebjjct0yIxQkyJTqLu426vW8m5bUDA&s",
+                       keywords: "lomba, kompetisi, edukasi, prestasi, pelatihan"
+            },
+            {
+                title: "Skill Arena Project",
+                url: "https://skilflow.iceiy.com/?i=2",
+                desc: "Pusat pengembangan karir dan sarana asah kemampuan profesional untuk masa depan.",
+                image: "https://cdn.educba.com/academy/wp-content/uploads/2024/03/Essay-on-Competition.jpg",
+                keywords: "karir, kerja, skill, pelatihan, profesional"
+            },
+            {
+                title: "Nexus Workspace",
+                url: "https://nexusproject-amber.vercel.app/",
+                desc: "Solusi manajemen proyek terpadu dan kolaboratif untuk efisiensi kerja tim.",
+                image: "https://kelasbeasiswa.com/wp-content/uploads/2024/02/5-Skill-yang-Dibutuhkan-Untuk-Menjadi-Project-Manager.png",
+                keywords: "project management, tools, kerja, kolaborasi, tim"
+            },
+            {
+                title: "Strigo Ride Hailing",
+                url: "https://strigo.vercel.app/",
+                desc: "Inovasi transportasi online terdesentralisasi berbasis teknologi Blockchain yang transparan.",
+                image: "data:image/jpeg;base64,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",
+                keywords: "blockchain, transportasi, ride hailing, online, web3"
+            },
+            {
+                title: "Book Mart Project",
+                url: "https://book-mart-fawn.vercel.app/",
+                desc: "Marketplace buku digital terlengkap untuk memenuhi segala kebutuhan literasi Anda.",
+                image: "data:image/jpeg;base64,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",
+                   keywords: "buku, ebook, literasi, baca, digital"
+            },
+            {
+                title: "Sky Climb Project",
+                url: "https://sky-climb.vercel.app/",
+                desc: "Toko online perlengkapan mendaki gunung berkualitas tinggi untuk para petualang.",
+                image: "data:image/jpeg;base64,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",
+                keywords: "gunung, hiking, outdoor, petualang, camping"
+            },
+            {
+                title: "Privte Linktree",
+                url: "https://nabil-creative.vercel.app/",
+                desc: "Portal akses khusus untuk mengelola tautan dan sumber daya pribadi dengan aman.",
+                image: "https://www.internetcepat.id/wp-content/uploads/2024/11/image.jpeg",
+                keywords: "private, link, admin, manajemen, personal"
+            },
+             {
+                title: "My LinkedIn",
+                url: "https://id.linkedin.com/in/nabil-abror-222245249", 
+                desc: "Terhubung secara profesional dan perluas jejaring bisnis melalui profil LinkedIn saya.",
+                image: "https://yt3.googleusercontent.com/i6KNxiy3gME-BulL4WnuGkTGqHuSYF8jl1WRn0rXftcJdSYK7dHKcJ3gLAaPc-KfhmLSYPwf824=s900-c-k-c0x00ffffff-no-rj",
+                keywords: "linkedin, profesional, karir, network, jejaring"
+            },
+                 {
+                title: "Cincau Lite",
+                url: "https://cincaulite.iceiy.com/?i=1", 
+                desc: "Platform e-commerce modern yang menghadirkan kesegaran cincau otentik langsung ke tangan Anda.",
+                
+                image: "data:image/jpeg;base64,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",
+                keywords: "cincau, minuman, segar, e-commerce, fnb, jualan"
+            },
+            {
+                title: "Aethel Core",
+                url: "https://aethelcore.iceiy.com/?i=1", 
+                desc: "Pengembangan teknologi Artificial Intelligence canggih untuk solusi otomatisasi masa depan.",
+    
+                image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=100&q=80",
+                keywords: "ai, artificial intelligence, teknologi, robot, coding, masa depan"
+            },
+            {
+                title: "Nala Alam",
+                url: "https://nalaalam.iceiy.com/?i=1", 
+                desc: "Platform edukasi interaktif yang didedikasikan untuk pelestarian lingkungan dan pengenalan alam.",
+               
+                image: "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=100&q=80",
+                keywords: "alam, lingkungan, edukasi, hijau, bumi, nature"
+            }
+        ];
+        // --- DOM ELEMENTS ---
+        const linksContainer = document.getElementById('linksContainer');
+        const searchInput = document.getElementById('searchInput');
+        const notFoundState = document.getElementById('notFoundState');
+        const searchKeywordSpan = document.getElementById('searchKeyword');
+
+        // --- FUNGSI 1: RENDER LINKS (Menampilkan Data) ---
+        function renderLinks(data) {
+            linksContainer.innerHTML = ''; // Bersihkan container
+
+            // Jika data kosong (tidak ada hasil search)
+            if (data.length === 0) {
+                notFoundState.style.display = 'block';
+                return;
+            } else {
+                notFoundState.style.display = 'none';
+            }
+
+            // Loop setiap data dan buat HTML-nya
+            data.forEach((link, index) => {
+                const card = document.createElement('a');
+                card.href = link.url;
+                card.target = "_blank"; // Buka tab baru
+                card.className = "link-card";
+                
+                // Tambahkan delay animasi bertingkat (staggered animation)
+                card.style.animationDelay = `${index * 0.1}s`;
+
+                card.innerHTML = `
+                    <img src="${link.image}" alt="${link.title}" class="card-img">
+                    <div class="card-info">
+                        <div class="card-title">${link.title}</div>
+                        <div class="card-desc">${link.desc}</div>
+                    </div>
+                    <i class="ph ph-caret-right card-arrow"></i>
+                `;
+
+                linksContainer.appendChild(card);
+            });
+        }
+
+        // --- FUNGSI 2: LIVE SEARCH LOGIC ---
+        function handleSearch(e) {
+            const keyword = e.target.value.toLowerCase();
+            
+            // Tampilkan keyword di pesan not found
+            searchKeywordSpan.innerText = keyword;
+
+            // Logika Filter: Mencari kecocokan pada Judul, Deskripsi, atau Keywords
+            const filteredLinks = myLinks.filter(link => {
+                return link.title.toLowerCase().includes(keyword) || 
+                       link.desc.toLowerCase().includes(keyword) ||
+                       link.keywords.toLowerCase().includes(keyword);
+            });
+
+            // Render ulang berdasarkan hasil filter
+            renderLinks(filteredLinks);
+        }
+
+        // --- INISIALISASI ---
+        // 1. Tampilkan semua link saat pertama kali buka
+        renderLinks(myLinks);
+
+        // 2. Pasang event listener pada input
+        searchInput.addEventListener('input', handleSearch);
+// --- FUNGSI 3: WHATSAPP FORM LOGIC ---
+        
+        const modal = document.getElementById('waModal');
+
+        // Fungsi Buka/Tutup Modal
+        function toggleModal(show) {
+            if (show) {
+                modal.classList.add('active');
+            } else {
+                modal.classList.remove('active');
+            }
+        }
+
+        // Tutup modal jika klik di luar kotak (area gelap)
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                toggleModal(false);
+            }
+        });
+
+        // Fungsi Kirim ke WhatsApp
+        function sendToWhatsApp(e) {
+            e.preventDefault(); // Mencegah form refresh halaman
+
+            // 1. Ambil data dari input
+            const name = document.getElementById('waName').value;
+            const userPhone = document.getElementById('waPhone').value;
+            const message = document.getElementById('waMessage').value;
+
+            // 2. Nomor tujuan (Format internasional tanpa +)
+            // Target: +62 889-8545-4681 -> 6288985454681
+            const targetPhone = "6288985454681";
+
+            // 3. Format Pesan
+            // \n digunakan untuk baris baru (Enter)
+            const formattedText = `Halo kak, perkenalkan:%0A` +
+                                  `Nama: *${name}*%0A` +
+                                  `No. WA: ${userPhone}%0A%0A` +
+                                  `Pesan:%0A${message}`;
+
+            // 4. Buat URL WhatsApp
+            const waUrl = `https://wa.me/${targetPhone}?text=${formattedText}`;
+
+            // 5. Buka WhatsApp di tab baru
+            window.open(waUrl, '_blank');
+
+            // Opsional: Tutup modal & Reset form setelah kirim
+            toggleModal(false);
+            document.getElementById('waForm').reset();
+        }
+        // --- FUNGSI 4: AI CHAT INTELLIGENCE ---
+        
+        const aiModal = document.getElementById('aiModal');
+        const chatMessages = document.getElementById('chatMessages');
+        const aiInput = document.getElementById('aiInput');
+        const typingIndicator = document.getElementById('typingIndicator');
+
+        // KONFIGURASI API (Sesuai Permintaan)
+        // DATABASE PENGETAHUAN AI (Data Profil Kamu Lengkap)
+        const contextData = `
+        PROFILE: MOHMMAD NABILAH ABROR. Website: https://nabil-profile.vercel.app/. Phone: +62 889-8545-4681. Email: lobiianewar1234@gmail.com.
+        SUMMARY: Management student at Universitas Negeri Yogyakarta (GPA 3.47). 1st Place Most Outstanding Student 2024. Won 29 national business competitions.
+        EDUCATION: UNY (Management, 2022-Present). UGM (Wirausaha Merdeka, 2024). Future Skills UGM (CSR, 2023).
+        AWARDS (HIGHLIGHTS): 1st Winner NBCC 2025 UIN Malang, 1st IEC Business Model Trisakti 2024, 1st Business Plan Umsida, Andalas, KMB Solo Raya, STIKOM Bali. 
+        EXPERIENCE:
+        1. Founder Brulle Roots (May 2025-Present): Dessert business, profit Rp101k/month.
+        2. CFO Toko Putra Barokah (Jan 23-Jul 25): Financial management, bookkeeping.
+        3. Founder Asisten Tugas (Feb 23-Present): Academic assistance, Net Income 8.5jt.
+        4. Founder Nexgrata Agency (Mar 25-Present): Web Dev & UI/UX, Profit 2.2jt.
+        5. Assistant Lecturer UNY (2023-2024): Research, Co-author of IoT Book.
+        INTERNSHIPS: Ralat.ind (Product Manager), Stechoq (BizDev), SF Group (Product Strategy), Fixup Legal (BizDev), Anuva Study (Finance), Damirich (Consultant), Growth House (VP BizDev), etc.
+        ORGANIZATION: BEM FEB UNY (Head of Strategic Studies), FMEI (Strategic Research), UKM Penelitian.
+        SKILLS: Leadership, Critical Thinking, Fin. Analysis, Web Dev (HTML, CSS, JS, PHP), UI/UX (Figma), Python AI.
+        
+        INSTRUCTION: You are Nabil's AI Assistant. Answer purely based on the data above. Keep answers concise, professional, friendly, and use formatting (bold/lists) for readability. If asked about something not in data, say you don't know but suggest contacting Nabil directly. Use Bahasa Indonesia mainly unless asked in English.
+        `;
+
+        // Riwayat Chat (Agar AI ingat konteks percakapan sebelumnya)
+        let chatHistory = [
+            {
+                role: "user",
+                parts: [{ text: "Hafalkan konteks ini untuk menjawab pertanyaan selanjutnya: " + contextData }]
+            },
+            {
+                role: "model",
+                parts: [{ text: "Siap, saya mengerti. Saya adalah asisten Nabilah Abror." }]
+            }
+        ];
+
+        function toggleAIChat(show) {
+            if (show) {
+                aiModal.classList.add('active');
+                setTimeout(() => aiInput.focus(), 500); // Auto focus ke input
+            } else {
+                aiModal.classList.remove('active');
+            }
+        }
+
+        function handleEnter(e) {
+            if (e.key === 'Enter') sendMessageAI();
+        }
+
+       // --- HAPUS BAGIAN API KEY LAMA ---
+        // const API_KEY = "JANGAN_TARUH_DISINI"; 
+        // const API_URL = ... (Hapus ini juga)
+
+        // --- GANTI FUNGSI SEND MESSAGE ---
+        async function sendMessageAI() {
+            const text = aiInput.value.trim();
+            if (!text) return;
+
+            addMessageToUI(text, 'user');
+            aiInput.value = '';
+            
+            typingIndicator.style.display = 'flex';
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            try {
+                // Update History
+                chatHistory.push({ role: "user", parts: [{ text: text }] });
+
+                // PERUBAHAN DISINI:
+                // Kita memanggil file 'api/chat.js' yang kita buat tadi
+                const response = await fetch('chat.js', {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        contents: chatHistory
+                    })
+                });
+
+                const data = await response.json();
+                
+                // Pastikan data valid
+                if (!data.candidates || !data.candidates[0]) {
+                    throw new Error("Gagal mendapat respon");
+                }
+
+                const aiResponse = data.candidates[0].content.parts[0].text;
+
+                chatHistory.push({ role: "model", parts: [{ text: aiResponse }] });
+                const formattedResponse = formatText(aiResponse);
+                addMessageToUI(formattedResponse, 'ai');
+
+            } catch (error) {
+                console.error("Error:", error);
+                addMessageToUI("Maaf, terjadi kesalahan atau kuota habis. 🙏", 'ai');
+            } finally {
+                typingIndicator.style.display = 'none';
+            }
+        }
+        function addMessageToUI(text, sender) {
+            const div = document.createElement('div');
+            div.className = `message ${sender}`;
+            div.innerHTML = text; // Menggunakan innerHTML agar bold/enter terbaca
+            
+            // Sisipkan sebelum loading indicator
+            chatMessages.insertBefore(div, typingIndicator);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Fungsi sederhana untuk mengubah simbol text menjadi format HTML (Bold & Newline)
+        // FUNGSI PERBAIKAN: FORMAT TEXT (BERSIH TOTAL)
+        function formatText(text) {
+            let formatted = text;
+
+            // 1. Ubah **teks** menjadi <b>teks</b> (Bold)
+            formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
+
+            // 2. Ubah * di awal baris (List) menjadi titik bulat (•)
+            // Menggunakan flag 'gm' agar mendeteksi awal setiap baris
+            formatted = formatted.replace(/^\s*\*\s/gm, '• ');
+
+            // 3. PEMBERSIHAN TOTAL: Hapus semua sisa tanda bintang (*) yang masih ada
+            // Ini akan menghapus '*' pada kasus error seperti "dessert*", "co-author*", dll.
+            formatted = formatted.replace(/\*/g, '');
+
+            // 4. Ubah baris baru (Enter) menjadi <br> agar rapi ke bawah
+            formatted = formatted.replace(/\n/g, '<br>');
+
+            return formatted;
+        }
+    </script>
+</body>
+</html>
